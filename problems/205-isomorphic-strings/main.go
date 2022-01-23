@@ -9,27 +9,27 @@ func main() {
 }
 
 func isIsomorphic(s string, t string) bool {
-	patternByte := []byte(s)
-	strList := []byte(t)
+	sList := []byte(s)
+	tList := []byte(t)
 
-	if (s == "" && t != "") || (len(patternByte) != len(strList)) {
+	if (s == "" && t != "") || (len(sList) != len(tList)) {
 		return false
 	}
 
-	pMap := map[byte]byte{}
 	sMap := map[byte]byte{}
-	for index, b := range patternByte {
-		if _, ok := pMap[b]; !ok {
-			if _, ok = sMap[strList[index]]; !ok {
-				pMap[b] = strList[index]
-				sMap[strList[index]] = b
+	pMap := map[byte]byte{}
+	for index, b := range sList {
+		if _, ok := sMap[b]; !ok {
+			if _, ok = pMap[tList[index]]; !ok {
+				sMap[b] = tList[index]
+				pMap[tList[index]] = b
 			} else {
-				if sMap[strList[index]] != b {
+				if pMap[tList[index]] != b {
 					return false
 				}
 			}
 		} else {
-			if pMap[b] != strList[index] {
+			if sMap[b] != tList[index] {
 				return false
 			}
 		}
